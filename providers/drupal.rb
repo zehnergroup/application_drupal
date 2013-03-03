@@ -61,7 +61,6 @@ def create_settings_files
     else
       settings_template = new_resource.settings_template || "#{new_resource.settings_file_name}.erb"
     end
-    Chef::Log.info("Environment: #{new_resource.server_environment}")
     source settings_template
     local new_resource.settings_template_on_repo
     owner new_resource.owner
