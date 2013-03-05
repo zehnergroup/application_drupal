@@ -30,12 +30,21 @@ action :before_migrate do
 
   create_settings_files
 
+  unless new_resource.drupal_core.nil?
+    link ::File.join(new_resource.drupal_core, 'sites') do
+      owner new_resource.owner
+      group new_resource.group
+      to ::File.join(new_resource.release_path, 'sites')
+    end
+  end
+
 end
 
 action :before_symlink do
 end
 
 action :before_restart do
+
 end
 
 action :after_restart do

@@ -11,6 +11,8 @@ attribute :database_master_role, :kind_of => [String, NilClass], :default => nil
 attribute :packages, :kind_of => [Array, Hash], :default => []
 attribute :app_root, :kind_of => String, :default => "/"
 
+attribute :drupal_core, :kind_of => [String, NilClass], :default => nil
+
 attribute :settings_file, :kind_of => [String, NilClass], :default => 'settings.php'
 # Actually defaults to "#{settings_file_name}.erb", but nil means it wasn't set by the user
 attribute :settings_template, :kind_of => [String, NilClass], :default => nil
