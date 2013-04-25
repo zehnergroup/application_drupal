@@ -42,6 +42,15 @@ def setup_file_name
   @setup_file_name ||= setup_file.split(/[\\\/]/).last
 end
 
+attribute :main_menu_file, :kind_of => [String, NilClass], :default => 'main_menu.txt'
+# Actually defaults to "#{main_menu_file_name}.erb", but nil means it wasn't set by the user
+attribute :main_menu_template, :kind_of => [String, NilClass], :default => nil
+attribute :main_menu_template_on_repo, :kind_of => [TrueClass, FalseClass], :default => false
+
+def main_menu_file_name
+  @main_menu_file_name ||= main_menu_file.split(/[\\\/]/).last
+end
+
 def database(*args, &block)
   @database ||= Mash.new
   @database.update(options_block(*args, &block))

@@ -15,6 +15,7 @@ action :before_compile do
   new_resource.symlink_before_migrate.update({
     new_resource.settings_file_name => new_resource.settings_file,
     new_resource.setup_file_name => new_resource.setup_file,
+    new_resource.main_menu_file_name => new_resource.main_menu_file,
     new_resource.sass_config_file_name => new_resource.sass_config_file,
   })
 
@@ -95,6 +96,21 @@ def create_settings_files
     group new_resource.group
     mode "644"
     variables({ :environment => new_resource.server_environment })
+  end
+
+  # Create Main Menu (main_menu.txt) import file
+  template ::File.join(new_resource.path, 'shared', new_resource.main_menu_file_name) do
+    if (new_resource.main_menu_template_on_repo)
+      main_menu_template = ::File.join(new_resource.release_path, new_resource.main_menu_template)
+    else
+      main_menu_template = new_resource.main_menu_template || "#{new_resource.main_menu_file_name}.erb"
+    end
+    source main_menu_template
+    local new_resource.main_menu_template_on_repo
+    owner new_resource.owner
+    group new_resource.group
+    mode "644"
+    variables({ :host_name => new_resource.host_name })
   end
 
   # Create SASS config.rb file
