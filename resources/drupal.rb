@@ -37,6 +37,7 @@ attribute :setup_template, :kind_of => [String, NilClass], :default => nil
 attribute :setup_template_on_repo, :kind_of => [TrueClass, FalseClass], :default => false
 
 attribute :server_environment, :kind_of => [String, NilClass], :default => nil
+attribute :install_varnish, :kind_of => [TrueClass, FalseClass], :default => false
 
 def setup_file_name
   @setup_file_name ||= setup_file.split(/[\\\/]/).last

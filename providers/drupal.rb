@@ -79,7 +79,8 @@ def create_settings_files
     variables({
       :path => "#{new_resource.path}/current",
       :environment => new_resource.server_environment,
-      :database => new_resource.database
+      :database => new_resource.database,
+      :install_varnish => new_resource.install_varnish
     })
   end
 
@@ -95,7 +96,10 @@ def create_settings_files
     owner new_resource.owner
     group new_resource.group
     mode "644"
-    variables({ :environment => new_resource.server_environment })
+    variables({
+      :environment => new_resource.server_environment,
+      :install_varnish => new_resource.install_varnish
+    })
   end
 
   # Create Main Menu (main_menu.txt) import file
